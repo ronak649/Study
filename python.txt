@@ -1,0 +1,1239 @@
+get pip.py
+
+OR
+
+python3 get-pip.py
+
+pip3 install numpy --- to install numpy package
+
+******************************************************************************************
+to import package in a code write import numpy or import numpy as np 
+
+for a specific function only type from numpy import array --- from package import method/function
+
+******************************************************************************************
+np_2d[0] --- row 0
+np_2d[0][2] --- element in row 0 column 2 which is similar to np_2d[0,2]
+np_2d[:,1:3] --- returns elements of column indexed 1 and 2 i.e. 2nd and 3rd column
+np_2d[1,:] --- return the 2nd row 
+
+list_name.index('element_name') --- gives the index for that element in the list
+
+******************************************************************************************
+import numpy as np
+
+np_height = np.array([..,..])
+np_weight = np.array([..,..])
+bmi = np_weight / np_height ** 2
+
+IN: bmi
+OUT: array([..,..])
+
+IN: bmi > 23
+OUT: array([True, False], dtype = bool)
+
+IN: bmi[bmi > 23]
+OUT: array([24.57])
+
+******************************************************************************************
+np.mean(np_city[:,0]) --- mean of a particaular column
+
+np.median
+
+np.corrcoef(np_city[:,0], np_city[:,1]) --- co-relation between two columns
+
+np.std(np_city[:,1])
+
+******************************************************************************************
+to generate random data:
+
+height = np.round(np.random.normal(1.75 #mean , 0.20 #std, 5000 #number of samples),2)
+
+weight = np.round(np.random.normal(60.32 #mean , 15 #std, 5000 #number of samples),2)
+
+np._city = np.column_stack(height, weight)
+
+******************************************************************************************
+np_positions[] and np_heights
+
+gk_heights = np_heights[np_positions == 'GK']
+other_heights = np_heights[np_positions != 'GK']
+
+******************************************************************************************
+import matplotlib.pyplot as plt
+
+year = [1950 , 1970, 1990, 2010]
+pop = [2.519, 3.692, 5.263, 6.972]
+
+plt.plot(year, pop) --- line plot
+          x     y
+plt.show() --- important to see the plot
+
+plt.scatter(year, pop, s='gdp' #size of the bubble based on gdp, c = 'r' #color of the bubble, alpha ='0.5' #bubble is transparent(0) or opaque(1)) --- scatter plot
+
+plt.xscale('log') --- to put x-axis on a logarithmic scale
+
+plt.hist(x #values for which the histogram is being built, bins = y #to tell python to divide the data into y bins)  if bins arg is not defined, it will be 10 by default.
+
+plt.clf() to clean up plot
+
+plt.xlabel('') --- to label the x-axis
+plt.ylabel('') --- to label the y-axis
+plt.title('') --- to give title to the plot
+plt.yticks([0, 2, 4, 6, 8, 10]) --- y-axis starts from 0 with intervals of 2
+          (['0', '2B', '4B', '6B', '8B', '10B']) --- to name the ticks. should be of the same lengthe as the ticks array.
+          
+
+plt.text(x,y #x and y co-ordinates of where to place the text, s ='Text')
+
+******************************************************************************************
+to create a dictionary, use {} and inside the brackets there will be key:value pairs.
+
+dict_name = {"key1":value1, "key2":value2, ......}
+IN:  dict_name["key1"]
+OUT: value1
+
+dict_name["key4"] = value4 --- to add key:value pair to existing dictionary
+IN: key4 in dict_name  OUT: True --- key4 exists in dictionary.
+
+del(dict_name["key4"]) --- to delete an entry in a dictionary
+
+******************************************************************************************
+dict={"country":["Brazil", "Russia, "India", "China", "South Africa"],
+      "capital":["Brasilia","Moscow","New Delhi","Beijing","Pretoria"],
+      "area":[8.516, 17.10, 3.286, 9.597, 1.221],
+      "population":[200.4, 143.5, 1252, 1357, 52.98]}
+      keys=(column label)    values(data, column by column)
+      
+import pandas as pd
+brics = pd.DataFrame(dict)
+
+brics.index = ["BR","RU","IN","CH","SA"]
+
+------------------------------------------------------------------------------------------
+brics = pd.read_csv("path/to/brics.csv")
+
+brics = pd.read_csv("path/to/brics.csv" , index_col = 0 #to tell the read function that col 0 is the index col)
+
+brics["country"] --- to access the column
+brics[["country","capital"]] --- to get 2 coulmns
+
+brics[1:4] --- to access the 3 rows from 2 to 
+
+type(brics["country"]) --- to know the type of column
+
+brics.loc["RU"] --- Row Access for Russia. Info displayed one below the other pandas series
+brics.loc[:,"country"] --- country all rows in series form
+brics.loc[["RU"]] --- Row Access like Dataframe
+brics.loc[["RU","IN"]] --- DataFrame Row access for multiple countries
+brics.loc[["RU","IN"],["country","capital"]] --- Row and Column Access
+brics.loc[:,["country","capital"]] --- Accessing Info in the 2 columns about all rows
+
+brics.iloc[[1]] --- Row Access for Russia using index rather than label
+brics.iloc[[1, 2, 3], [0,1]] --- Row and Column Access using Index
+
+******************************************************************************************
+Comparison: <  >  <=  >=  ==  !=
+
+Boolean Operators : and or not  
+Numpy boolean operators : logical_and()   logical_or()   logical_not()
+np.logical_and(bmi >21, bmi<23)
+bmi[np.logical_and(bmi>21, bmi<23)]
+
+------------------------------------------------------------------------------------------
+if elif else
+z==2
+if z % 2 == 0:
+    print("z is divisible by 2")
+elif z % 3 ==0:
+    print("z is divisible by 3")
+else : 
+    print("z is divisible by neither")
+    
+------------------------------------------------------------------------------------------
+is_huge = brics["area"] > 8 --- select the area column and perform comparison
+brics[is_huge] --- info of countries with area greater than 8 is displayed in DataFrame
+
+brics[brics["area"] > 8] --- alternate method
+
+np.logical_and(brics["area"] > 8, brics["area"] < 10)
+brics[np.logical_and(brics["area"] > 8, brics["area"] < 10)]  --- to get info of countries in DatFrame using Boolean operators for area > 8 and <10.
+
+******************************************************************************************
+While loop.
+error = 50
+while error > 1 :
+    error = error / 4
+    print(error)
+
+------------------------------------------------------------------------------------------
+For loop.
+
+fam = [1.73, 1.68, 1.71, 1.89]
+
+for height in fam:
+    print(height)
+
+for index, height in enumerate(fam):
+    print("index" + str(index) + ":" +str(height))
+    
+house = [["hall", 20],["bath", 10], .....]    
+for x, y in house:
+    print("The " +str(x)+ " is " +str(y)+ " sqm")
+    
+------------------------------------------------------------------------------------------
+Loops for dictionary
+
+world = {"afghanistan" : 30.55,
+         "albania" : 2.77,
+         "algeria" : 39.27}
+
+for k, v in world.items():
+    print(k + " --" + str(v))
+
+Loops for numpy array
+bmi
+
+for val in bmi:
+    print(val)  --- for 1d array
+    
+np_height = np.array[1.73,...]
+np_weight = np.array[65.54,...]
+meas = np.array([np_height, np_weight])
+
+for val in np.nditer(meas):
+        print(val)
+        
+------------------------------------------------------------------------------------------
+Loops for DataFrames
+
+for lab, row in brics.iterrows() :
+    print(lab)
+    print(row)
+
+for lab, row in brics.iterrows() :
+    print(row['country'])
+
+for lab, row in brics.iterrows() :
+    brics.loc[lab, "name_length"] = len(row["country"])
+
+------------------------------------------------------------------------------------------
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('cars.csv', index_col = 0)
+
+# Code for loop that adds COUNTRY column
+for lab, row in cars.iterrows():
+    cars.loc[lab,"COUNTRY"] = row["country"].upper()
+
+# Print cars
+print(cars)
+
+------------------------------------------------------------------------------------------
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('cars.csv', index_col = 0)
+
+# Use .apply(str.upper)
+cars["COUNTRY"] = cars["country"].apply(str.upper)
+
+print(cars)
+
+******************************************************************************************
+np.random.rand() --- Generates random number
+
+np.random.seed(123) --- Seed is the base value used for random number generation. By default it will take the value of the time in the system.
+coin = np.random.randint(0,2) --- Randomly generate 0 or 1
+print(coin)
+if coin == 0:
+    print("heads")
+else:
+    print("tails")
+
+for x in range(10) --- to generate a list of numbers to iterate over.
+
+append() --- add x to the previous number of x 
+
+x = max(10, x - 1) --- to make sure the variable never goes below 10
+
+******************************************************************************************
+Defining functions:
+
+def square(value): --- Function header
+    new_value = value**2 --- Function Body
+    print(new_value)
+    
+IN: square(4)
+OUT: 16
+
+
+def square(value):
+    new_value = value**2
+    return new_value --- Returns the value instead of printing it.
+    
+num = square(4)
+
+print(num)
+
+------------------------------------------------------------------------------------------
+DocStrings:
+Describes what your function does.
+"""Comment here"""
+
+******************************************************************************************
+def shout_all(word1, word2):
+
+    shout1 = word1 + '!!!'
+    
+    shout2 = word2 + '!!!'
+    
+    shout_words = (shout1, shout2)
+
+    return shout_words
+
+yell1, yell2 = shout_all('congratulations', 'you')
+
+print(yell1)
+print(yell2)
+
+******************************************************************************************
+SCOPE:
+1. Global Scope : Defined in the main body of a script
+2. Local Scope : Defined inside a function. Cannot be accessed outside function definition.
+2. Built-in Scope : names in the pre-defined built-ins module.
+
+Nested functions:
+
+def echo(n):
+    """Return the inner_echo function."""
+
+    # Define inner_echo
+    def inner_echo(word1):
+        """Concatenate n copies of word1."""
+        echo_word = word1 * n
+        return echo_word
+
+    # Return inner_echo
+    return inner_echo
+
+# Call echo: twice
+twice = echo(2)
+
+# Call echo: thrice
+thrice = echo(3)
+
+# Call twice() and thrice() then print
+print(twice('hello'), thrice('hello'))
+
+OUT: hellohello hellohellohello
+
+******************************************************************************************
+*args --- when you want to pass any number of arguments to the function
+**kwargs --- when you want to pass any number of key:value pairs to the function
+
+def report_status(**kwargs):
+
+    print("\nBEGIN: REPORT\n")
+
+    # Iterate over the key-value pairs of kwargs
+    for keys, values in kwargs.items():
+        # Print out the keys and values, separated by a colon ':'
+        print(keys + ": " + values)
+
+    print("\nEND REPORT")
+
+# First call to report_status()
+report_status(name = "luke", affiliation = "jedi", status = "missing")
+
+# Second call to report_status()
+report_status(name= "anakin", affiliation= "sith lord", status= "deceased")
+
+OUTPUT:
+BEGIN: REPORT
+
+name: luke
+affiliation: jedi
+status: missing
+
+END REPORT
+
+BEGIN: REPORT
+
+name: anakin
+affiliation: sith lord
+status: deceased
+
+END REPORT
+
+******************************************************************************************
+# Define echo_word as a lambda function: echo_word              |def echo_word(word1, echo):
+echo_word = (lambda word1, echo: word1 * echo)                  |   words = word1 * echo
+                                                                |   return words
+# Call echo_word: result                                        |       
+result = echo_word('hey', echo = 5)                             |result = echo_word('hey', echo = 5)
+                                                                |
+# Print result                                                  |print(result)
+print(result)                                                   |
+
+------------------------------------------------------------------------------------------
+Lambda function using list
+
+# Create a list of strings: spells
+spells = ["protego", "accio", "expecto patronum", "legilimens"]
+
+# Use map() to apply a lambda function over spells: shout_spells
+shout_spells = map(lambda items: items + '!!!', spells)
+
+# Convert shout_spells to a list: shout_spells_list
+shout_spells_list = list(shout_spells)
+
+# Print the result
+print(shout_spells_list)
+
+------------------------------------------------------------------------------------------
+# Create a list of strings: fellowship
+fellowship = ['frodo', 'samwise', 'merry', 'pippin', 'aragorn', 'boromir', 'legolas', 'gimli', 'gandalf']
+
+# Use filter() to apply a lambda function over fellowship: result
+result = filter(lambda member: len(member) > 6, fellowship)
+
+# Convert result to a list: result_list
+result_list = list(result)
+
+# Print result_list
+print(result_list)
+
+******************************************************************************************
+Try and Except:
+# Define shout_echo                                                          
+def shout_echo(word1, echo=1):                                               
+    """Concatenate echo copies of word1 and three                               
+    exclamation marks at the end of the string."""
+
+    # Initialize empty strings: echo_word, shout_words
+    echo_word = ''
+    shout_words = ''
+
+    # Add exception handling with try-except
+    try:
+        # Concatenate echo copies of word1 using *: echo_word
+        echo_word = word1 * echo
+
+        # Concatenate '!!!' to echo_word: shout_words
+        shout_words = echo_word + '!!!'
+    except:
+        # Print error message
+        print("word1 must be a string and echo must be an integer.")
+
+    # Return shout_words
+    return shout_words
+
+# Call shout_echo
+shout_echo("particle", echo="accelerator")
+
+------------------------------------------------------------------------------------------
+Raise:
+
+def shout_echo(word1, echo=1):
+    """Concatenate echo copies of word1 and three
+    exclamation marks at the end of the string."""
+
+    # Raise an error with raise
+    if echo < 1:
+        raise ValueError('echo must be greater than 0')
+
+    # Concatenate echo copies of word1 using *: echo_word
+    echo_word = word1 * echo
+
+    # Concatenate '!!!' to echo_word: shout_word
+    shout_word = echo_word + '!!!'
+
+    # Return shout_word
+    return shout_word
+
+# Call shout_echo
+shout_echo("particle", echo=5)
+
+******************************************************************************************
+Iterators
+
+# Create a list of strings: flash
+flash = ['jay garrick', 'barry allen', 'wally west', 'bart allen']
+
+# Print each list item in flash using a for loop
+for i in flash:
+    print(i)
+    
+# Create an iterator for flash: superspeed
+superspeed = iter(flash)
+
+# Print each item from the iterator
+print(next(superspeed))
+print(next(superspeed))
+print(next(superspeed))
+print(next(superspeed))
+
+OUT:
+    jay garrick
+    barry allen
+    wally west
+    bart allen
+    jay garrick
+    barry allen
+    wally west
+    bart allen
+
+------------------------------------------------------------------------------------------
+names= ["Thor", "Steve"]
+Avengers = enumerate(names, start = 2) 
+OUT: [(2, "Thor"), (3, "Steve")]
+
+# Create a list of tuples: mutant_data
+mutant_data = list(zip(mutants, aliases, powers))
+
+# Print the list of tuples
+print(mutant_data)
+
+# Create a zip object using the three lists: mutant_zip
+mutant_zip = zip(mutants, aliases, powers)
+
+# Print the zip object
+print(mutant_zip)
+
+# Unpack the zip object and print the tuple values
+for value1, value2, value3 in mutant_zip:
+    print(value1, value2, value3)
+    
+OUT:
+[('charles xavier', 'prof x', 'telepathy'), ('bobby drake', 'iceman', 'thermokinesis'), ('kurt wagner', 'nightcrawler', 'teleportation'), ('max eisenhardt', 'magneto', 'magnetokinesis'), ('kitty pryde', 'shadowcat', 'intangibility')]
+    <zip object at 0x7fd3be026ec8>
+    charles xavier prof x telepathy
+    bobby drake iceman thermokinesis
+    kurt wagner nightcrawler teleportation
+    max eisenhardt magneto magnetokinesis
+    kitty pryde shadowcat intangibility
+
+******************************************************************************************
+doctor = ['house', 'cuddy', 'chase', 'thirteen', 'wilson']
+[doc[0] for doc in doctor] --- list comprehension to print the first letter from the words in the list doctor.
+
+# Create list comprehension: squares
+squares = [i**2 for i in range(0,10)]
+print(squares)
+
+------------------------------------------------------------------------------------------
+# Create a 5 x 5 matrix using a list of lists: matrix
+matrix = [[col for col in range(0,5)] for row in range (0,5)]
+
+# Print the matrix
+for row in matrix:
+    print(row)
+    
+Output:
+    [0, 1, 2, 3, 4]
+    [0, 1, 2, 3, 4]
+    [0, 1, 2, 3, 4]
+    [0, 1, 2, 3, 4]
+    [0, 1, 2, 3, 4]
+    
+------------------------------------------------------------------------------------------
+# Create a list of strings: fellowship
+fellowship = ['frodo', 'samwise', 'merry', 'aragorn', 'legolas', 'boromir', 'gimli']
+
+# Create list comprehension: new_fellowship
+new_fellowship = [member for member in fellowship if len(member) >= 7]
+
+# Print the new list
+print(new_fellowship)
+
+------------------------------------------------------------------------------------------
+# Create list comprehension: new_fellowship
+new_fellowship = [member if len(member) >= 7 else '' for member in fellowship]
+
+------------------------------------------------------------------------------------------
+
+# Create dict comprehension: new_fellowship
+new_fellowship = {member : len(member) for member in fellowship}
+
+# Print the new dictionary
+print(new_fellowship)
+
+******************************************************************************************
+Generators: instead of [] like in list comprehension we use () --- LC produces list while genrator function produces generator object.
+# Create a list of strings: lannister
+lannister = ['cersei', 'jaime', 'tywin', 'tyrion', 'joffrey']
+
+# Create a generator object: lengths
+lengths = (len(person) for person in lannister)
+
+# Iterate over and print the values in lengths
+for value in lengths:
+    print(value)
+    
+------------------------------------------------------------------------------------------
+# Create a list of strings
+lannister = ['cersei', 'jaime', 'tywin', 'tyrion', 'joffrey']
+
+# Define generator function get_lengths
+def get_lengths(input_list):
+    """Generator function that yields the
+    length of the strings in input_list."""
+
+    # Yield the length of a string
+    for person in input_list:
+        yield len(person)
+
+# Print the values generated by get_lengths()
+for value in get_lengths(lannister):
+    print(value)
+    
+******************************************************************************************
+if __name__ == '__main__':
+    n = int(raw_input())
+    arr = map(int, raw_input().split())
+
+    listnew=[]
+
+    for i in arr:
+        if i not in listnew:
+            listnew.append(i)
+
+    listnew.sort(reverse=True)
+
+    print(listnew[1])
+    
+******************************************************************************************
+marksheet = []
+scorelist = []
+for _ in range(int(raw_input())):
+    name = raw_input()
+    score = float(raw_input())
+
+    marksheet += [[name, score]]
+
+    scorelist += [score]
+
+b = sorted(list(set(scorelist)))[1]
+
+for a,c in sorted(marksheet):
+    if c == b:
+        print(a)
+        
+******************************************************************************************
+if __name__ == '__main__':
+    n = int(raw_input())
+    student_marks = {}
+    for _ in range(n):
+        line = raw_input().split()
+        name, scores = line[0], line[1:]
+        scores = map(float, scores)
+        student_marks[name] = scores
+    query_name = raw_input()
+    query_scores = student_marks[query_name]
+
+    print("{0:.2f}".format(sum(query_scores)/(len(query_scores))))
+******************************************************************************************    
+    
+import textwrap
+
+def wrap(string, max_width):
+    return textwrap.fill(string, max_width)
+
+if __name__ == '__main__':
+    string, max_width = raw_input(), int(raw_input())
+    result = wrap(string, max_width)
+    print result
+******************************************************************************************    
+
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+
+
+if __name__ == '__main__':
+    n = int(raw_input())
+
+    arr = map(int, raw_input().rstrip().split())
+
+    print(" ".join(map(str, arr[::-1])))
+******************************************************************************************    
+
+n = int(raw_input())
+phonebook = {}
+
+for i in range(n):
+    name, id = raw_input().split()
+    phonebook[name] = id
+
+while(1):
+    try:
+        name = raw_input()
+    
+        if(phonebook.has_key(name)):
+            print(name + "=" + phonebook[name])
+
+        else:
+            print("Not found")
+        
+    except EOFError as error:
+        break
+******************************************************************************************    
+Decimal to binary:
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+
+
+if __name__ == '__main__':
+    n = int(raw_input())
+    result = []
+    a = 0
+    while n > 0:
+        a = n%2
+        result += [a]
+        n //= 2
+    
+    print("".join(map(str, result[::-1])))
+******************************************************************************************    
+printing maximum number of consecutive 1 in the binary conversion of a number.
+    
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+
+
+if __name__ == '__main__':
+    n = int(raw_input())
+    result = 0
+    maximum = 0
+
+    while n > 0:
+        if n % 2 == 1:
+            result += 1
+            if result > maximum:
+                maximum = result
+
+        else:
+            result = 0
+
+        n //= 2
+
+    print(maximum)
+******************************************************************************************    
+
+Calculate the hourglass sum for every hourglass in a 2D array, then print the maximum hourglass sum:
+
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+
+
+if __name__ == '__main__':
+    arr = []
+
+    for _ in xrange(6):
+        arr.append(map(int, raw_input().rstrip().split()))
+
+    maximum = -9 * 7
+
+    for i in range(6):
+        for j in range(6):
+            if j + 2 < 6 and i + 2 < 6:
+                result = arr[i][j] + arr[i][j + 1] + arr[i][j + 2] + arr[i + 1][j + 1] + arr[i + 2][j] + arr[i + 2][j + 1] + arr[i + 2][j + 2]
+            
+            if result > maximum:
+                maximum = result
+
+print(maximum)
+******************************************************************************************    
+
+Constructor:
+
+class Person:
+	def __init__(self, firstName, lastName, idNumber):
+		self.firstName = firstName
+		self.lastName = lastName
+		self.idNumber = idNumber
+	def printPerson(self):
+		print("Name:", self.lastName + ",", self.firstName)
+		print("ID:", self.idNumber)
+
+class Student(Person):
+    #   Class Constructor
+    #   
+    #   Parameters:
+    #   firstName - A string denoting the Person's first name.
+    #   lastName - A string denoting the Person's last name.
+    #   id - An integer denoting the Person's ID number.
+    #   scores - An array of integers denoting the Person's test scores.
+    #
+    # Write your constructor here
+    def __init__(self, firstName, lastName, idNumber, testScores):
+        super().__init__(firstName, lastName, idNumber)
+        self.testScores = testScores    
+
+    #   Function Name: calculate
+    #   Return: A character denoting the grade.
+    #
+    # Write your function here
+    def calculate(self):
+        total = 0
+
+        for testScore in self.testScores:
+            total += testScore
+
+        avg = total / len(self.testScores)
+
+        if 90 <= avg <= 100:
+            return 'O'
+        if 80 <= avg < 90:
+            return 'E'
+        if 70 <= avg < 80:
+            return 'A'
+        if 55 <= avg < 70:
+            return 'P'
+        if 40 <= avg < 55:
+            return 'D'
+        return 'T'
+
+line = input().split()
+firstName = line[0]
+lastName = line[1]
+idNum = line[2]
+numScores = int(input()) # not needed for Python
+scores = list( map(int, input().split()) )
+s = Student(firstName, lastName, idNum, scores)
+s.printPerson()
+print("Grade:", s.calculate())
+******************************************************************************************    
+
+Abstract class and inheritance:
+
+from abc import ABCMeta, abstractmethod
+class Book(object, metaclass=ABCMeta):
+    def __init__(self,title,author):
+        self.title=title
+        self.author=author   
+    @abstractmethod
+    def display(): pass
+
+#Write MyBook class
+class MyBook(Book):
+    price = 0
+    def __init__(self, title, author, price):
+        super(Book, self).__init__()
+        self.price = price
+    
+    def display(self):
+        print("Title: "+title)
+        print("Author: "+author)
+        print("Price: "+str(price))
+
+title=input()
+author=input()
+price=int(input())
+new_novel=MyBook(title,author,price)
+new_novel.display()
+******************************************************************************************    
+
+Scope:
+
+class Difference:
+    def __init__(self, a):
+        self.__elements = a
+
+	# Add your code here
+    def computeDifference(self):
+        maximum = 0
+
+        for i in range(len(self.__elements)):
+            for j in range(len(self.__elements)):
+                absolute = abs(self.__elements[i] - self.__elements[j])
+                if absolute > maximum:
+                    maximum = absolute
+
+        self.maximumDifference = maximum    
+# End of Difference class
+
+_ = input()
+a = [int(e) for e in input().split(' ')]
+
+d = Difference(a)
+d.computeDifference()
+
+print(d.maximumDifference)
+******************************************************************************************    
+
+if __name__ == '__main__':
+    N = int(input())
+    l = []
+
+    for _ in range(N):
+        s = input().split()
+        cmd = s[0]
+        args = s[1:]
+
+        if cmd != "print":
+            cmd += "(" + "," .join(args) + ")"
+            eval("l."+cmd)
+        
+        else:
+            print(l)
+******************************************************************************************    
+
+Prime Number: 
+
+def prime(num):
+  if num > 1 :
+    
+    for i in range(2,num):
+      if (num%i) == 0:
+        print("Number is not Prime.")
+        break
+      
+    else:
+      print(num, " is a Prime number")
+  
+  else:
+    print("Number is not prime")
+    
+    
+n = int(input("Enter a Number: "))
+prime(n)
+******************************************************************************************    
+
+Palindrome:
+
+def reverse(s):
+  return s[::-1]
+  
+def palin(s):
+  
+  rev = reverse(s)
+  
+  if(s == rev):
+    print(s, " is a Palindrome")
+  
+  else:
+    print(s, " is not a Palindrome")
+    
+
+word = input("Enter a word: ")
+palin(word)
+******************************************************************************************    
+
+Fibbonacci under a certain value:
+
+def fib(n):
+    a, b = 0, 1
+    while a < n:
+        print(a, end=' ')
+        a, b = b, a+b
+    print()
+fib(1000)
+******************************************************************************************    
+
+Fibbonacci with user defined number of number of numbers in series
+
+def fib(n):
+  
+  a = 0
+  b = 1
+  
+  if(n < 1):
+    print("Invalid entry")
+  
+  else:
+    for i in range(n):
+      print(a, end = ' ')
+      b = a + b
+      a = b - a
+    
+    
+num = int(input("Enter the number of numbers in the series: "))
+fib(num)
+******************************************************************************************    
+
+Fibonaaci with user defined starting 2 digits and number of numbers in the series.
+
+def fib(a,b,n):
+  
+  if(n < 1):
+    print("Invalid entry")
+  
+  else:
+    for i in range(n):
+      print(a, end = ' ')
+      b = a + b
+      a = b - a
+    
+
+start = int(input("Enter the start of the series: "))
+second = int(input("Enter the second number of the series: "))
+num = int(input("Enter the number of numbers in the series: "))
+fib(start, second, num)
+******************************************************************************************    
+
+given a dictionary of file_name as key and owner as value, return dictionary with owners_name as key and all the files_owned as list.
+
+def group_by_owners(files)
+    file_own = {}
+    
+    for k,v in sorted(files.items()):
+        file_own.setdefault(v, []).append(k)
+    
+    return file_own
+
+if __name__ == "__main__":    
+    files = {
+        'Input.txt': 'Randy',
+        'Code.py': 'Stan',
+        'Output.txt': 'Randy'
+    }   
+    print(group_by_owners(files))
+******************************************************************************************    
+
+Count values in a column:
+Column_values = df["Column_name"].value_counts()
+
+******************************************************************************************    
+
+Decimal to Binary:
+def dectobin(num):
+    if num > 1:
+        dectobin(num//2)
+    print(num%2, end ='')
+
+number = int(input("Enter a number: "))
+dectobin(number)
+
+******************************************************************************************    
+
+Remove Vowels from a string:
+def solve(str):
+    # Write your code here
+    vowels = ('a','e','i','o','u','A','E','I','O','U')
+    
+    for b in str:
+        if b in vowels:
+            str = str.replace(b, '')
+    
+    return str
+
+str = input("Enter the string: ").strip()
+print(solve(str))
+
+******************************************************************************************    
+
+Swap a and b without using a 3rd variable:
+a = 20
+print("a = ", a)
+b = 10
+print("b = ", b)
+
+a = a + b
+b = a - b
+a = a - b
+
+print("a = ", a)
+print("b = ", b)
+
+******************************************************************************************    
+
+Python code for calculating pre-tax, post-tax earning:
+
+Wage = int(input("Enter hourly wage : "))
+Hours = int(input("Enter number of hours per week: "))
+
+Earning = Wage*Hours
+
+if Earning > 2000:
+    print("pre-tax earning = ", Earning)
+    print("post-tax earning = ", Earning * 0.7)
+
+else:
+    print("pre-tax earning = ", Earning)
+    print("post-tax earning = ", Earning * 0.85)
+    
+******************************************************************************************    
+n ride k tokens, maximum rides:
+ 
+import re
+import sys
+import os
+import math
+import random
+
+def result(arr, tok):
+    count = 0
+    sum = 0
+
+    for i in arr:      
+        while sum <= tok:
+            sum = sum + i
+            count = count + 1
+    
+    return count - 1
+
+
+n = input("Enter the number of rides: ")
+rides = map(int, input("Enter the token value for each ride : ").split())
+
+k = int(input("Enter the value of tokens you have: "))
+
+print("The maximum number of rides you can enjoy : ", + result(rides, k))
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
+
+
+
+******************************************************************************************    
